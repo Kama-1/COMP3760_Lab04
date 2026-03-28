@@ -112,7 +112,7 @@ public class Graph
      */
     public String getLabel(int v)
     {
-
+        return vertexLabels[v];
     }
 
     /**
