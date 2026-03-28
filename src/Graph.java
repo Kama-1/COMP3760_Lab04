@@ -46,7 +46,7 @@ public class Graph
      */
     public boolean isDirected()
     {
-
+        return isDirected;
     }
 
     /**
