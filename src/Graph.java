@@ -206,6 +206,11 @@ public class Graph
      */
     public String getLastDFSOrder()
     {
+        return getString();
+    }
+
+    private String getString()
+    {
         return lastDFSResult == null ? "Depth first search has not been run yet" : lastDFSResult;
     }
 
@@ -226,7 +231,7 @@ public class Graph
      */
     String getLastBFSOrder()
     {
-
+        return lastBFSResult == null ? "Breadth first search has not been run yet" : lastBFSResult;
     }
 
 }
