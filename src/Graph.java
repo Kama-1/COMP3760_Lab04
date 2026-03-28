@@ -14,6 +14,7 @@ public class Graph
     int[][] adjacencyMatrix;
     String lastBFSResult;
     String lastDFSResult;
+    String lastDFSDeadOrder;
 
 
     /**
@@ -221,7 +222,7 @@ public class Graph
      */
     public String getLastDFSDeadEndOrder()
     {
-
+        return lastDFSDeadOrder == null ? "Depth first search has not been run yet" : lastDFSDeadOrder;
     }
 
     /**
