@@ -122,7 +122,25 @@ public class Graph
      */
     public String toString()
     {
+        StringBuilder sb = new StringBuilder();
+        int size = size();
 
+        for (int i = 0; i < size; i++)
+        {
+            // label
+            sb.append(getLabel(i));
+            sb.append(":");
+
+            // Adjacency matrix
+            for (int j = 0; j < size; j++)
+            {
+                sb.append(" ");
+                sb.append(adjacencyMatrix[i][j]);
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 
     /**
