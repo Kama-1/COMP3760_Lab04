@@ -206,7 +206,7 @@ public class Graph
      */
     public String getLastDFSOrder()
     {
-
+        return lastDFSResult == null ? "Depth first search has not been run yet" : lastDFSResult;
     }
 
     /**
