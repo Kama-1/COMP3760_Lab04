@@ -67,7 +67,7 @@ public class Graph
      */
     public int size()
     {
-
+        return vertexLabels.length;
     }
 
     /**
