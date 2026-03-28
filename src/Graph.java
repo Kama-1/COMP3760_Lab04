@@ -4,8 +4,11 @@
  * @set C
  * @studentnumber A01405877
  */
+
 public class Graph
 {
+    final public int NOT_FOUND = -1;
+
     String[] vertexLabels;
     boolean isDirected;
     int[][] adjacencyMatrix;
@@ -40,6 +43,21 @@ public class Graph
         return matrix;
     }
 
+    private int getIndexFromLabel(String label)
+    {
+        int index = NOT_FOUND;
+        int size = size();
+        for (int i = 0; i < size; i++)
+        {
+            if (vertexLabels[i].equals(label))
+            {
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+
     /**
      * Returns whether the graph is directed.
      * @return true or false depending on if the graph is directed or undirected respectfully.
@@ -58,7 +76,24 @@ public class Graph
      */
     public void addEdge(String a, String b)
     {
+        if (a.isBlank() || b.isBlank())
+            return;
 
+        int indexA = getIndexFromLabel(a);
+        int indexB = getIndexFromLabel(b);
+
+        if (indexA == -1 || indexB == -1)
+            return;
+
+        if (isDirected)
+        {
+            adjacencyMatrix[indexA][indexB] = 1;
+        }
+        else
+        {
+            adjacencyMatrix[indexA][indexB] = 1;
+            adjacencyMatrix[indexB][indexA] = 1;
+        }
     }
 
     /**
