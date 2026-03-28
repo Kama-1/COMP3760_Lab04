@@ -6,6 +6,12 @@
  */
 public class Graph
 {
+    String[] vertexLabels;
+    boolean isDirected;
+    int[][] adjacencyMatrix;
+    String lastBFSResult;
+    String lastDFSResult;
+
 
     /**
      * Graph constructor for an NxN adjacency matrix and initialized to all zeroes.
@@ -15,7 +21,23 @@ public class Graph
      */
     public Graph(String[] vertexLabels, boolean isDirected)
     {
+        this.vertexLabels = vertexLabels;
+        this.isDirected = isDirected;
+        this.adjacencyMatrix = initializeAdjacencyMatrix(vertexLabels.length);
+    }
 
+    private int[][] initializeAdjacencyMatrix(int n)
+    {
+        int[][] matrix = new int[n][n];
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                matrix[i][j] = 0;
+            }
+        }
+
+        return matrix;
     }
 
     /**
