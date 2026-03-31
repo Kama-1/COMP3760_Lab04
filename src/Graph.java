@@ -307,6 +307,8 @@ public class Graph
         ArrayList<String> visited = new ArrayList<>();
 
         visited.add(v);
+        if (!quiet)
+            System.out.println("Visiting vertex " + v);
 
         queue.add(v);
         while (!queue.isEmpty())
@@ -318,6 +320,8 @@ public class Graph
                 queue.add(nextVertex);
                 visited.add(nextVertex);
                 nextVertex = searchAdjacencyMatrixForNextVertex(currentVertex, visited);
+                if (!quiet)
+                    System.out.println("Visiting vertex " + nextVertex);
             }
 
         }
