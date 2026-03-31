@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -285,7 +287,8 @@ public class Graph
      */
     public void runBFS(boolean quiet)
     {
-
+        String firstVertex = getLowestLabelValue();
+        runBFS(firstVertex, quiet);
     }
 
     /**
@@ -300,7 +303,26 @@ public class Graph
      */
     public void runBFS(String v, boolean quiet)
     {
+        Queue<String> queue = new LinkedList<>();
+        ArrayList<String> visited = new ArrayList<>();
 
+        visited.add(v);
+
+        queue.add(v);
+        while (!queue.isEmpty())
+        {
+            String currentVertex = queue.remove();
+            String nextVertex = searchAdjacencyMatrixForNextVertex(currentVertex, visited);
+            while(!nextVertex.equals(currentVertex))
+            {
+                queue.add(nextVertex);
+                visited.add(nextVertex);
+                nextVertex = searchAdjacencyMatrixForNextVertex(currentVertex, visited);
+            }
+
+        }
+
+        lastBFSResult = visited.toString();
     }
 
     /**
