@@ -77,28 +77,6 @@ public class Graph
         return lowest;
     }
 
-    private String getNextLowest(String current)
-    {
-        String nextLowest = current;
-        for (String label : vertexLabels)
-        {
-            if (label.compareTo(nextLowest) < 0 && label.compareTo(current) > 0)
-            {
-                nextLowest = label;
-            }
-        }
-
-        return nextLowest;
-    }
-
-    private String getLowestVertexFromAdjacent(String current)
-    {
-        String next = null;
-
-
-
-        return next;
-    }
 
     /**
      * Returns whether the graph is directed.
