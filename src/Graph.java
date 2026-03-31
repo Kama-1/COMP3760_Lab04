@@ -4,6 +4,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
+ * A class to simulate DFS or BFS on a graph with vertices and edges
  *
  * @author Anna Jang
  * @set C
