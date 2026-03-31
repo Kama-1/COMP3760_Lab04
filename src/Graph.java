@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  *
  * @author Anna Jang
@@ -57,6 +60,42 @@ public class Graph
             }
         }
         return index;
+    }
+
+    private String getLowestLabelValue()
+    {
+        String lowest = vertexLabels[0];
+        for (String label : vertexLabels)
+        {
+            if (label.compareTo(lowest) < 0)
+            {
+                lowest = label;
+            }
+        }
+        return lowest;
+    }
+
+    private String getNextLowest(String current)
+    {
+        String nextLowest = current;
+        for (String label : vertexLabels)
+        {
+            if (label.compareTo(nextLowest) < 0 && label.compareTo(current) > 0)
+            {
+                nextLowest = label;
+            }
+        }
+
+        return nextLowest;
+    }
+
+    private String getLowestVertexFromAdjacent(String current)
+    {
+        String next = null;
+
+
+
+        return next;
     }
 
     /**
@@ -153,7 +192,31 @@ public class Graph
      */
     public void runDFS(boolean quiet)
     {
+        String firstVertex = getLowestLabelValue();
+        runDFS(firstVertex, quiet);
+    }
 
+    private String searchAdjacencyMatrixForNextVertex(String current, ArrayList<String> visited)
+    {
+        String nextVertex = current;
+        int size = size();
+        int index = getIndexFromLabel(current);
+        for (int i = 0; i < size; i++)
+        {
+            int adjacency = adjacencyMatrix[index][i];
+            if (adjacency == 1)
+            {
+                String adjacencyValue = getLabel(i);
+                if (!visited.contains(adjacencyValue))
+                {
+                    if (adjacencyValue.compareTo(nextVertex) < 0 || nextVertex.equals(current))
+                    {
+                        nextVertex = adjacencyValue;
+                    }
+                }
+            }
+        }
+        return nextVertex;
     }
 
     /**
@@ -170,7 +233,47 @@ public class Graph
      */
     public void runDFS(String v, boolean quiet)
     {
+        ArrayList<String> visited = new ArrayList<>();
+        ArrayList<String> deadEnds = new ArrayList<>();
+        Stack<String> stack = new Stack<>();
+        stack.push(v);
+        visited.add(v);
+        if (!quiet)
+            System.out.println("Visiting vertex " + v);
 
+        String nextVertex = v;
+
+        while (!stack.empty())
+        {
+            int index = getIndexFromLabel(nextVertex);
+            String originalVertex = getLabel(index);
+            // Check adjacent for the lowest neighbour
+            nextVertex = searchAdjacencyMatrixForNextVertex(originalVertex, visited);
+            // If no lower vertex was found, pop
+            if (nextVertex.equals(originalVertex))
+            {
+                String possibleEnd = stack.pop();
+                nextVertex = searchAdjacencyMatrixForNextVertex(possibleEnd, visited);
+                if (nextVertex.equals(possibleEnd))
+                    deadEnds.add(nextVertex);
+                else
+                {
+                    stack.push(possibleEnd);
+                    stack.push(nextVertex);
+                    visited.add(nextVertex);
+                }
+            }
+            else // Otherwise, move to the next lowest one
+            {
+                stack.push(nextVertex);
+                visited.add(nextVertex);
+                if (!quiet)
+                    System.out.println("Visiting vertex " + nextVertex);
+            }
+
+        }
+        lastDFSResult = visited.toString();
+        lastDFSDeadOrder = deadEnds.toString();
     }
 
     /**
