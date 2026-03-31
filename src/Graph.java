@@ -332,11 +332,6 @@ public class Graph
      */
     public String getLastDFSOrder()
     {
-        return getString();
-    }
-
-    private String getString()
-    {
         return lastDFSResult == null ? "Depth first search has not been run yet" : lastDFSResult;
     }
 
